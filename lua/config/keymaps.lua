@@ -5,8 +5,6 @@
 local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 
-keymap.set("i", "jj", "<Esc>")
-keymap.set("v", "jj", "<Esc>")
 keymap.set("i", "<S-Enter>", "<C-y>")
 
 keymap.set("n", "<leader>q", "<cmd>bd<CR>", { desc = "Delete buffer" })
