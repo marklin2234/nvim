@@ -8,15 +8,15 @@ return {
             scroll = { enabled = false },
         },
     },
-    -- install without yarn or npm
-    {
-        "iamcco/markdown-preview.nvim",
-        cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-        ft = { "markdown" },
-        build = function()
-            vim.fn["mkdp#util#install"]()
-        end,
-    },
+    -- -- install without yarn or npm
+    -- {
+    --     "iamcco/markdown-preview.nvim",
+    --     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    --     ft = { "markdown" },
+    --     build = function()
+    --         vim.fn["mkdp#util#install"]()
+    --     end,
+    -- },
     -- add this to your lua/plugins.lua, lua/plugins/init.lua,  or the file you keep your other plugins:
     {
         "numToStr/Comment.nvim",
@@ -25,19 +25,20 @@ return {
         },
         lazy = false,
     },
+    -- {
+    --     "TobinPalmer/pastify.nvim",
+    --     cmd = { "Pastify", "PastifyAfter" },
+    --     config = function()
+    --         require("pastify").setup({
+    --             opts = {
+    --                 apikey = "YOUR API KEY (https://api.imgbb.com/)", -- Needed if you want to save online.
+    --             },
+    --         })
+    --     end,
+    -- },
     {
-        "TobinPalmer/pastify.nvim",
-        cmd = { "Pastify", "PastifyAfter" },
-        config = function()
-            require("pastify").setup({
-                opts = {
-                    apikey = "YOUR API KEY (https://api.imgbb.com/)", -- Needed if you want to save online.
-                },
-            })
-        end,
-    },
-    {
-        "telescope.nvim",
+        "nvim-telescope/telescope.nvim",
+        tag = "0.1.6",
         dependencies = {
             {
                 "nvim-telescope/telescope-fzf-native.nvim",
@@ -215,6 +216,53 @@ return {
     {
         "neovim/nvim-lspconfig",
         opts = {
+            servers = {
+                tsserver = {
+                    enabled = false,
+                },
+                ts_ls = {
+                    enabled = false,
+                },
+                vtsls = {
+                    -- explicitly add default filetypes, so that we can extend
+                    -- them in related extras
+                    filetypes = {
+                        "javascript",
+                        "javascriptreact",
+                        "javascript.jsx",
+                        "typescript",
+                        "typescriptreact",
+                        "typescript.tsx",
+                    },
+                    settings = {
+                        complete_function_calls = true,
+                        vtsls = {
+                            enableMoveToFileCodeAction = true,
+                            autoUseWorkspaceTsdk = true,
+                            experimental = {
+                                maxInlayHintLength = 30,
+                                completion = {
+                                    enableServerSideFuzzyMatch = true,
+                                },
+                            },
+                        },
+                    },
+                },
+                typescript = {
+                    updateImportsOnFileMove = { enabled = "always" },
+                    suggest = {
+                        completeFunctionCalls = true,
+                    },
+                    inlayHints = {
+                        enumMemberValues = { enabled = true },
+                        functionLikeReturnTypes = { enabled = true },
+                        parameterNames = { enabled = "literals" },
+                        parameterTypes = { enabled = true },
+                        propertyDeclarationTypes = { enabled = true },
+                        variableTypes = { enabled = false },
+                    },
+                },
+            },
             setup = {
                 clangd = function(_, opts)
                     opts.capabilities.offsetEncoding = { "utf-16" }
