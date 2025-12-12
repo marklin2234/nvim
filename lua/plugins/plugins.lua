@@ -253,6 +253,8 @@ return {
         opts = {
             ensure_installed = {
                 "pyright",
+                "mypy",
+                "ruff",
                 "clangd",
             },
         },
