@@ -135,7 +135,9 @@ return {
             local actions = require("telescope.actions")
             local fb_actions = require("telescope").extensions.file_browser.actions
 
-            opts.defaults = vim.tbl_deep_extend("force", opts.defaults, {
+            opts = opts or {}
+
+            opts.defaults = vim.tbl_deep_extend("force", opts.defaults or {}, {
                 wrap_results = true,
                 layout_strategy = "vertical",
                 layout_config = { prompt_position = "top", width = 0.6 },
@@ -186,31 +188,6 @@ return {
             telescope.setup(opts)
             require("telescope").load_extension("fzf")
             require("telescope").load_extension("file_browser")
-        end,
-    },
-    {
-        "nvimtools/none-ls.nvim",
-        config = function()
-            local null_ls = require("null-ls")
-            null_ls.setup({
-                sources = {
-                    null_ls.builtins.formatting.clang_format.with({
-                        filetypes = { "c", "cpp" },
-                        extra_args = { "--style=LLVM" }, -- Adjust the style as needed
-                    }),
-                },
-                on_attach = function(client, bufnr)
-                    if client.supports_method("textDocument/formatting") then
-                        -- Format on save (async in 0.8+, sync removed in 0.10+)
-                        vim.api.nvim_create_autocmd("BufWritePre", {
-                            buffer = bufnr,
-                            callback = function()
-                                vim.lsp.buf.format({ bufnr = bufnr })
-                            end,
-                        })
-                    end
-                end,
-            })
         end,
     },
     {
@@ -268,6 +245,15 @@ return {
                     opts.capabilities.offsetEncoding = { "utf-16" }
                     opts.cmd = { "clangd" }
                 end,
+            },
+        },
+    },
+    {
+        "mason-org/mason.nvim",
+        opts = {
+            ensure_installed = {
+                "pyright",
+                "clangd",
             },
         },
     },
