@@ -9,14 +9,14 @@ return {
         },
     },
     -- -- install without yarn or npm
-    -- {
-    --     "iamcco/markdown-preview.nvim",
-    --     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-    --     ft = { "markdown" },
-    --     build = function()
-    --         vim.fn["mkdp#util#install"]()
-    --     end,
-    -- },
+    {
+        "iamcco/markdown-preview.nvim",
+        cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+        ft = { "markdown" },
+        build = function()
+            vim.fn["mkdp#util#install"]()
+        end,
+    },
     -- add this to your lua/plugins.lua, lua/plugins/init.lua,  or the file you keep your other plugins:
     {
         "numToStr/Comment.nvim",
