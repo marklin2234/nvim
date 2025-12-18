@@ -8,11 +8,11 @@ return {
                 h = { "clang_format" },
                 hpp = { "clang_format" },
             },
-            formatters = {
-                clang_format = {
-                    prepend_args = { "--style=LLVM" },
-                },
-            },
+            -- formatters = {
+            --     clang_format = {
+            --         prepend_args = { "--style=LLVM" },
+            --     },
+            -- },
         },
     },
 }
