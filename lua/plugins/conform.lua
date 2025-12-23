@@ -7,7 +7,9 @@ return {
                 cpp = { "clang_format" },
                 h = { "clang_format" },
                 hpp = { "clang_format" },
+                python = { "black" }
             },
+
             -- formatters = {
             --     clang_format = {
             --         prepend_args = { "--style=LLVM" },
